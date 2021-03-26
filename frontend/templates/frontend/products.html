@@ -9,7 +9,7 @@
             <div class="col-4">
                 <h1 class="h2">Products</h1>
             </div>
-            <div class="col-5 ">
+            <div class="col">
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="input-group w-100">
                         <select class="custom-select" id="inputGroupSelect04">
@@ -19,23 +19,19 @@
                         <input type="text" class="form-control" aria-label="Text input with dropdown button">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button">Search</button>
+                            <button class="btn btn-outline-secondary" type="button">All</button>
+                            <form class="float-end" action="/" id="sortForm">
+                                <label for="sortItems">Sort by: </label>
+                                <select class="custom-select btn "  id="sortItems" name="sortlist" form="sortForm">
+                                  <option class="text-secondary" value="name">Name</option>
+                                  <option class="text-secondary" value="price">Price</option>
+                                </select>
+                              </form>
                         </div>
                     </div>
                 </div>          
             </div>
-            <div class="col-1 text-center">                
-                <button class="btn btn-outline-secondary" id="allProducts">All</button>
-            </div>
-            <div class="col text-secondary">
-                                
-                <form action="/" id="sortForm">
-                    <label for="sortItems">Sort by: </label>
-                    <select class="custom-select btn "  id="sortItems" name="sortlist" form="sortForm">
-                      <option class="text-secondary" value="name">Name</option>
-                      <option class="text-secondary" value="price">Price</option>
-                    </select>
-                  </form>
-            </div>
+            
         </div>
 
 
