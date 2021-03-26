@@ -5,21 +5,37 @@
     {% endif %}    
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Products</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button class="btn btn-sm btn-outline-secondary">Share</button>
-              <button class="btn btn-sm btn-outline-secondary">Export</button>
-              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a onclick="">Name</a></li>
-                  <li><a href="#">Price</a></li>
-                </ul>
-              </div>
+
+            <div class="col-4">
+                <h1 class="h2">Products</h1>
             </div>
-          </div>
+            <div class="col-5 ">
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="input-group w-100">
+                        <select class="custom-select" id="inputGroupSelect04">
+                            <option selected value="1">Name</option>
+                            <option value="2">Code</option>
+                          </select>
+                        <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Search</button>
+                        </div>
+                    </div>
+                </div>          
+            </div>
+            <div class="col-1 text-center">                
+                <button class="btn btn-outline-secondary" id="allProducts">All</button>
+            </div>
+            <div class="col text-secondary">
+                                
+                <form action="/" id="sortForm">
+                    <label for="sortItems">Sort by: </label>
+                    <select class="custom-select btn "  id="sortItems" name="sortlist" form="sortForm">
+                      <option class="text-secondary" value="name">Name</option>
+                      <option class="text-secondary" value="price">Price</option>
+                    </select>
+                  </form>
+            </div>
         </div>
 
 
