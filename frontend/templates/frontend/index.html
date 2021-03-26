@@ -26,24 +26,33 @@
             <div class="row">
                 <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                     <li class="nav-item">
-                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
+                      <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Home</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="pills-products-tab" data-toggle="pill" href="#pills-products" role="tab" aria-controls="pills-products" aria-selected="false">products</a>
+                      <a class="nav-link active" id="pills-products-tab" data-toggle="pill" href="#pills-products" role="tab" aria-controls="pills-products" aria-selected="false">products</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" id="pills-cart-tab" data-toggle="pill" href="#pills-cart" role="tab" aria-controls="pills-cart" aria-selected="false">
                         cart
                         <i class="fa fa-shopping-cart"></i>
+                        USD $<span class="cart-total">0</span>
                       </a>
                       
                     </li>
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{% include "frontend/landingPage.html" %}</div>
-                    <div class="tab-pane fade" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">{% include "frontend/products.html" %}</div>
+                    <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{% include "frontend/landingPage.html" %}</div>
+                    <div class="tab-pane fade show active" id="pills-products" role="tabpanel" aria-labelledby="pills-products-tab">{% include "frontend/products.html" %}</div>
                     <div class="tab-pane fade" id="pills-cart" role="tabpanel" aria-labelledby="pills-cart-tab">{% include "frontend/checkout.html" %}</div>
                 </div>
+                <footer class="my-5 pt-5 text-muted text-center text-small">
+                  <p class="mb-1">© {% now "Y" %} Einstein Coffee</p>
+                  <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Privacy</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Support</a></li>
+                  </ul>
+                </footer>
             </div>
         </div>
           
