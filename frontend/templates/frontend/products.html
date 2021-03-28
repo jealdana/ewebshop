@@ -19,7 +19,7 @@
                         <input type="text" class="form-control" aria-label="Text input with dropdown button">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button">Search</button>
-                            <button class="btn btn-outline-secondary" type="button">All</button>
+                            <button onclick="allProd()" class="btn btn-outline-secondary" type="button">All</button>
                             <form class="float-end" action="/" id="sortForm">
                                 <label for="sortItems">Sort by: </label>
                                 <select class="custom-select btn "  id="sortItems" name="sortlist" form="sortForm">
@@ -35,7 +35,7 @@
         </div>
 
 
-        <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div id='productsList' class="row row-cols-1 row-cols-md-3 g-4">
             {% for product in products_info%}            
             <div class="col">
                 <div class="card">
@@ -89,3 +89,100 @@
       </main>
     </div>
   </div>
+
+
+  <script>
+    function createDiv(type,kwargs = {className:'',innerText:'',innerHTML:''}){
+        let divCustom = document.createElement(type);
+        divCustom.innerText = (kwargs.innerText === '') ? "" : kwargs.innerText;
+        console.log(divCustom.innerText)
+        divCustom.className = (kwargs.className === '') ? "" : kwargs.className;
+        return divCustom;
+      
+    }
+
+    function allProd(){
+      let createTaskCard = (product) => {
+
+        let card = createDiv('div',{className:'card',innerText:'',innerHTML:''});
+
+        let cardImg = createDiv('img',{className:'card-img-top',innerText:'',innerHTML:''});
+          cardImg.setAttribute("src", product.photo_url);
+          cardImg.setAttribute("style", "height: 20em;");
+
+        let cardBody = createDiv('div',{className:'card-body',innerText:'',innerHTML:''});
+        
+        let title = createDiv('h5',{innerText:product.name,className:'card-title'});
+        let code = createDiv('p',{innerText:`Code ${product.code}`,className:'card-text'});
+        let price = createDiv('p',{innerText:`USD $ ${product.price}`,className:'card-text'});
+
+        let footer = createDiv('div',{className:'card-footer',innerText:'',innerHTML:''});
+        let lastPurchase = createDiv('small',{innerText:`Last purchase made ${Math.floor(Math.random() * 100)} mins ago`,className:'text-muted'});
+
+        
+        
+        footer.appendChild(lastPurchase);
+        cardBody.appendChild(title);
+        cardBody.appendChild(code);
+        cardBody.appendChild(price);
+
+        card.appendChild(cardImg);
+        card.appendChild(cardBody);
+        card.appendChild(footer);
+        return card;
+
+      }
+    
+    let allProductsMockupList = [
+            {
+                'photo_url':"https://ih1.redbubble.net/image.2039039614.0432/icr,iphone_12_tough,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
+                'name': "Forest during winter iPhone Case & Cover",
+                'price': 26.64,
+                'description': "Lovely sight across the fields towards a snowed forest in winter",
+                'tag': "winter"
+            },
+            {
+                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
+                'name': "Thriving during winter iPhone Case & Cover",
+                'code': '123CODE',
+                'price': 16.9,
+                'description': "Thriving through the winter's cold",
+                'tag': "winter"
+            },
+            {
+                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
+                'name': "Thriving during winter iPhone Case & Cover",
+                'price': 16.9,
+                'description': "Thriving through the winter's cold",
+                'tag': "winter"
+            },
+            {
+                'photo_url':"https://images-na.ssl-images-amazon.com/images/I/61cSXGmXFaL._SL1000_.jpg",
+                'name': "Thriving during winter iPhone Case & Cover",
+                'code': '123CODE',
+                'price': 16.9,
+                'description': "Thriving through the winter's cold",
+                'tag': "winter"
+            },
+            {
+                'photo_url':"https://images-na.ssl-images-amazon.com/images/I/61u67tnq3vL._SL1500_.jpg",
+                'name': "Thriving during winter iPhone Case & Cover",
+                'price': 16.9,
+                'description': "Thriving through the winter's cold",
+                'tag': "winter"
+            }
+        ];
+
+    let productsList = document.getElementById('productsList');
+    productsList.innerHTML = '';
+    
+    allProductsMockupList.forEach( product => 
+        { 
+          let colDiv = createDiv('div',{className:'col',innerText:'',innerHTML:''});
+          colDiv.appendChild( createTaskCard(product) );
+          productsList.appendChild(colDiv);
+        }
+      );
+
+    }
+  </script>
