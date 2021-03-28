@@ -21,40 +21,6 @@ class LandingPage(TemplateView):
                 'price': 26.64,
                 'description': "Lovely sight across the fields towards a snowed forest in winter",
                 'tag': "winter"
-            },
-            {
-                'id': 11,
-                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
-                'name': "Thriving during winter iPhone Case & Cover",
-                'code': '123CODE',
-                'price': 16.9,
-                'description': "Thriving through the winter's cold",
-                'tag': "winter"
-            },
-            {
-                'id': 12,
-                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
-                'name': "Thriving during winter iPhone Case & Cover",
-                'price': 16.9,
-                'description': "Thriving through the winter's cold",
-                'tag': "winter"
-            },
-            {
-                'id': 13,
-                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
-                'name': "Thriving during winter iPhone Case & Cover",
-                'code': '123CODE',
-                'price': 16.9,
-                'description': "Thriving through the winter's cold",
-                'tag': "winter"
-            },
-            {
-                'id': 14,
-                'photo_url':"https://ih1.redbubble.net/image.2042818921.5560/icr,iphone_12_soft,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
-                'name': "Thriving during winter iPhone Case & Cover",
-                'price': 16.9,
-                'description': "Thriving through the winter's cold",
-                'tag': "winter"
             }
         ]
         
