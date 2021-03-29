@@ -13,8 +13,8 @@
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="input-group w-100">
                         <select id="productSearchFilter" value='name' class="custom-select">
-                            <option selected value="name" onclick="selectProductSearchFilterName()">Name</option>
-                            <option value="code" onclick="selectProductSearchFilterCode()">Code</option>
+                            <option selected value="name" >Name</option>
+                            <option value="code" >Code</option>
                           </select>
                         <input id="productSearchInput" type="text" class="form-control" aria-label="Text input with dropdown button">
                         <div class="input-group-append">
@@ -22,7 +22,7 @@
                             <button onclick="allProd()" class="btn btn-outline-secondary" type="button">All</button>
                             <form class="float-end" action="/" id="sortForm">
                                 <label for="sortItems">Sort by: </label>
-                                <select class="custom-select btn "  id="sortItems" name="sortlist" form="sortForm">
+                                <select id="sortItems" class="custom-select btn " value='name' name="sortlist" form="sortForm">
                                   <option class="text-secondary" value="name">Name</option>
                                   <option class="text-secondary" value="price">Price</option>
                                 </select>
@@ -132,9 +132,6 @@
 
     }
   
-    function selectProductSearchFilterName(){
-      
-    }
 
     $(document).ready(function(){
           $('#productSearchFilter').on('change', function() {
@@ -148,17 +145,33 @@
               productsList.setAttribute('value','code');
             }
           });
+
+          $('#sortItems').on('change', function() {
+            let productsList = document.getElementById('productSearchFilter');
+            if ( this.value == 'name')
+            {
+              filterProd({value:'name'});
+              document.getElementById('sortItems').setAttribute('value','name');
+              
+            }
+            else
+            {
+              filterProd({value:'price'});
+              document.getElementById('sortItems').setAttribute('value','price');
+            }
+            
+          });
     });
     
-    function filterProd(){
+    function filterProd(order_by={value:'name'}){
       
       let productSearchFilter = document.getElementById('productSearchFilter');
       let productSearchInput = document.getElementById('productSearchInput');
-      console.log(productSearchFilter.getAttribute('value'),
-      productSearchInput.value);
+      
+
       let productsList = document.getElementById('productsList');
       
-      fetch(`http://localhost:8000/product/?${productSearchFilter.getAttribute('value')}=${productSearchInput.value}`)
+      fetch(`http://localhost:8000/product/?${productSearchFilter.getAttribute('value')}=${productSearchInput.value}&order_by=${order_by.value}`)
         .then(response => response.json())
         .then(data => {
           let allProductsMockupList = data.results;
@@ -181,23 +194,12 @@
     
     function allProd(){
 
-
-      fetch('http://localhost:8000/product')
-        .then(response => response.json())
-        .then(data => {
-          let allProductsMockupList = data.results;
+      let productSearchFilter = document.getElementById('productSearchFilter');
+      let productSearchInput = document.getElementById('productSearchInput');
+      productSearchFilter.setAttribute('value','name');
+      productSearchInput.value = '';
       
-          let productsList = document.getElementById('productsList');
-          productsList.innerHTML = '';
-          
-          allProductsMockupList.forEach( product => 
-              { 
-                let colDiv = createDiv('div',{className:'col',innerText:'',innerHTML:''});
-                colDiv.appendChild( createTaskCard(product) );
-                productsList.appendChild(colDiv);
-              }
-            );
-        });
+      filterProd({value:document.getElementById('sortItems').getAttribute('value')});
 
     }
   </script>

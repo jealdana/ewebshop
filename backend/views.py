@@ -40,11 +40,16 @@ class product_list(generics.ListAPIView):
         """
         queryset = Product.objects.all()
         name = self.request.query_params.get('name')
-        if name is not None:
-            queryset = queryset.filter(name=name)
         code = self.request.query_params.get('code')
+        order = self.request.query_params.get('order_by')
+        if order is None:
+            order = 'name'
+        if name is not None:
+            if name != '':                
+                queryset = queryset.filter(name=name)
         if code is not None:
-            queryset = queryset.filter(code=code)            
+            queryset = queryset.filter(code=code)        
+        queryset = queryset.order_by(order)
         return queryset
 
 

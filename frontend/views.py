@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
 from django.views.generic.base import TemplateView
-
+from backend.models import Product
 
 class LandingPage(TemplateView):
     # form_class = MyForm
@@ -13,16 +13,7 @@ class LandingPage(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['products_info'] = [
-            {
-                'id': 10,
-                'photo_url':"https://ih1.redbubble.net/image.2039039614.0432/icr,iphone_12_tough,back,a,x1000-pad,1000x1000,f8f8f8.jpg",
-                'name': "Forest during winter iPhone Case & Cover",
-                'price': 26.64,
-                'description': "Lovely sight across the fields towards a snowed forest in winter",
-                'tag': "winter"
-            }
-        ]
+        context['products_info'] = Product.objects.all().order_by('name')
         
         list_for_random = range(100)
         context['list_for_random'] = list_for_random
