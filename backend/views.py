@@ -28,24 +28,26 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from backend.models import Product
 from backend.serializers import ProductSerializer
+from rest_framework import generics
 
-@csrf_exempt
-def  product_list(request):
-    """
-    List all products, or create a new product.
-    """
-    if request.method == 'GET':
-        products = Product.objects.all()
-        serializer = ProductSerializer( products, many=True)
-        return JsonResponse(serializer.data, safe=False)
+class product_list(generics.ListAPIView):
+    serializer_class = ProductSerializer
 
-    elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = ProductSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Product.objects.all()
+        name = self.request.query_params.get('name')
+        if name is not None:
+            queryset = queryset.filter(name=name)
+        code = self.request.query_params.get('code')
+        if code is not None:
+            queryset = queryset.filter(code=code)            
+        return queryset
+
+
 
 @csrf_exempt
 def  product_detail(request, pk):

@@ -25,6 +25,6 @@ app_name = 'frontend'
 
 urlpatterns = [
     url(r'^$', LandingPage.as_view()),
-    path('product/', product_list),
+    path('product/', product_list.as_view()),
     path('product/<int:pk>/', product_detail),
 ]
