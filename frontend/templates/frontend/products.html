@@ -34,7 +34,44 @@
             
         </div>
 
+        <div class="row g-4 mb-3">
+          <div class="accordion" id="accordionExample">
+            <div class="card">
+              <div class="card-header" id="heading-{{ product.id }}">
+                <h2 class="mb-0 text-center">
+                  <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapse-{{ product.id }}" aria-expanded="true" aria-controls="collapse-{{ product.id }}">
+                    Add product
+                  </button>
+                </h2>
+              </div>
+          
+              <div id="collapse-{{ product.id }}" class="collapse" aria-labelledby="heading-{{ product.id }}" data-parent="#accordionExample">
+                <div class="card-body p-3">                                    
+                  <form id="prodCreate">{% csrf_token %}
+                    <label for="photo_url">photo_url</label>
+                    <input type="url" name="photo_url" id="photo_url"><br>
 
+                    <label for="name">name</label>
+                    <input type="text" name="name" id="name"><br>
+
+                    <label for="code">code</label>
+                    <input type="text" name="code" id="code"><br>
+
+                    <label for="price">price</label>
+                    <input type="number" name="price" id="price"><br>
+
+                    <label for="description">description</label> <br>                                        
+                    <textarea id="description" name="description" rows="3" cols="20"></textarea><br>
+                    <input type="submit" value="Submit">
+                  </form>
+                  <br></br>
+                    
+                      
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div id='productsList' class="row row-cols-1 row-cols-md-3 g-4">
             {% for product in products_info%}            
             <div class="col">
@@ -202,4 +239,23 @@
       filterProd({value:document.getElementById('sortItems').getAttribute('value')});
 
     }
+
+    $(document).on('submit','#prodCreate', function(e){
+      e.preventDefault();
+      $.ajax({
+        type:'POST',
+        url:'/product/create/',
+        data: {
+          photo_url:$('#photo_url').val(),
+          name:$('#name').val(),
+          code:$('#code').val(),
+          price:$('#price').val(),
+          description:$('#description').val(),
+          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success:function(){
+            alert('New product created');
+        }
+      });
+    });
   </script>

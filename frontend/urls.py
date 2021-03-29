@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.models import User
 from frontend import urls
-from frontend.views import LandingPage
+from frontend.views import LandingPage,createProduct
 from backend.views import product_list, product_detail
 
 app_name = 'frontend'
@@ -26,5 +26,6 @@ app_name = 'frontend'
 urlpatterns = [
     url(r'^$', LandingPage.as_view()),
     path('product/', product_list.as_view()),
+    path('product/create/', createProduct),
     path('product/<int:pk>/', product_detail),
 ]

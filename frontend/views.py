@@ -19,3 +19,25 @@ class LandingPage(TemplateView):
         context['list_for_random'] = list_for_random
 
         return context
+
+from .forms import ProductForm
+
+def createProduct(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        photo_url = request.POST['photo_url']
+        print(request.POST['photo_url'])
+        name = request.POST['name']
+        code = request.POST['code']
+        price = request.POST['price']
+        description = request.POST['description']
+
+        Product.objects.create(
+            photo_url = photo_url,
+            name = name,
+            code = code,
+            price = price,
+            description = description
+        )
+
+        return HttpResponse('')
