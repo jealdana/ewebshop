@@ -20,6 +20,9 @@ from rest_framework import routers, serializers, viewsets
 from django.conf.urls import url
 from backend import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -44,4 +47,4 @@ urlpatterns = [
 
 urlpatterns += [
         url(r'^', include('frontend.urls', namespace='frontend')),
-    ]
+    ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
