@@ -74,53 +74,7 @@
         </div>
         {% endif %}
         <div id='productsList' class="row row-cols-1 row-cols-md-3 g-4">
-            {% for product in products_info%}            
-            <div class="col">
-                <div class="card">
-                    <img src="{{ product.photo_url }}" class="card-img-top" alt="{{ product.name }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>                        
-                        <p class="card-text">
-                            Code {{ product.code|default:"unknown" }}
-                        </p>
-                        <p class="card-text"> USD $ {{ product.price }}</p>
-
-                        <div class="accordion" id="accordionExample">
-                            <div class="card">
-                              <div class="card-header" id="heading-{{ product.id }}">
-                                <h2 class="mb-0 text-center">
-                                  <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapse-{{ product.id }}" aria-expanded="true" aria-controls="collapse-{{ product.id }}">
-                                    see more
-                                  </button>
-                                </h2>
-                              </div>
-                          
-                              <div id="collapse-{{ product.id }}" class="collapse" aria-labelledby="heading-{{ product.id }}" data-parent="#accordionExample">
-                                <div class="card-body p-3">                                    
-                                    {% lorem 20 w %}
-                                    <br></br>
-                                    <form action="/" id="{{ product.id }}">
-                                        <label for="quantity">Quantity:</label>
-                                        <div class="input-group mb-3">
-                                            <input type="number" id="quantity" name="quantity" min="1" class="form-control" placeholder="0" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                              <button class="btn btn-primary" type="submit">Add to cart</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                      
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last purchase made {{ list_for_random | random }} mins ago</small>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+            
           </div>
         <div class="table-responsive">
         </div>
@@ -138,6 +92,53 @@
       
     }
 
+
+    let descriptionCart = (product) => {
+      let accordion = createDiv('div',{className:'accordion',innerText:'',innerHTML:''});
+      accordion.innerHTML = `
+      <div class="accordion" id="accordionExample">
+                            <div class="card">
+                              <div class="card-header" id="heading-${product.id}">
+                                <h2 class="mb-0 text-center">
+                                  <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapse-${product.id}" aria-expanded="true" aria-controls="collapse-${product.id}">
+                                    see more
+                                  </button>
+                                </h2>
+                              </div>
+                          
+                              <div id="collapse-${product.id}" class="collapse" aria-labelledby="heading-${product.id}" data-parent="#accordionExample">
+                                <div class="card-body p-3">                                    
+                                    ${product.description}
+                                    <br></br>
+                                    <form id="addCart" value="${product.id}" >
+                                        <label for="quantity">Quantity:</label>
+                                        <div class="input-group mb-3">
+                                            <input type="number" id="quantity" name="quantity" min="1" class="form-control" placeholder="1" value='1' aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                            <div class="input-group-append">
+                                              <button class="btn btn-primary" type="submit">Add to cart</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>  
+      `;
+      accordion.setAttribute('id',"accordionExample");
+      let card = createDiv('div',{className:'card',innerText:'',innerHTML:''});
+      let cardHeader = createDiv('div',{className:'card-header',innerText:'',innerHTML:''});
+      let h2 = createDiv('div',{className:'mb-0 text-center',innerText:'',innerHTML:''});
+      let buttonCustom = createDiv('div',{className:'btn btn-link btn-block',innerText:'see more',innerHTML:''});
+      let collapseDiv = createDiv('div',{className:'collapse',innerText:'',innerHTML:''});
+      let cardBody = createDiv('div',{className:'card-body p-3',innerText:'',innerHTML:''});
+      let form = createDiv('div',{className:'card',innerText:'',innerHTML:''});
+      let label = createDiv('div',{className:'card',innerText:'Quantity:',innerHTML:''});
+      let inputGroup= createDiv('div',{className:'input-group mb-3',innerText:'',innerHTML:''});
+      let inputQty = createDiv('div',{className:'form-control',innerText:'',innerHTML:''});
+      let inputButtonGroup = createDiv('div',{className:'input-group-append',innerText:'',innerHTML:''});
+      let inputButton = createDiv('div',{className:'btn btn-primary',innerText:'',innerHTML:''});
+      return accordion;
+    }
 
     let createTaskCard = (product) => {
 
@@ -162,6 +163,7 @@
       cardBody.appendChild(title);
       cardBody.appendChild(code);
       cardBody.appendChild(price);
+      cardBody.appendChild(descriptionCart(product));      
 
       card.appendChild(cardImg);
       card.appendChild(cardBody);
@@ -209,7 +211,7 @@
 
       let productsList = document.getElementById('productsList');
       
-      fetch(`http://localhost:8000/product/?${productSearchFilter.getAttribute('value')}=${productSearchInput.value}&order_by=${order_by.value}`)
+      fetch(`/product/?${productSearchFilter.getAttribute('value')}=${productSearchInput.value}&order_by=${order_by.value}`)
         .then(response => response.json())
         .then(data => {
           let allProductsMockupList = data.results;
@@ -258,5 +260,44 @@
             alert('New product created');
         }
       });
+    });
+
+    $(document).on('submit','#addCart', function(e){
+      e.preventDefault();
+
+      let qty = $(this).find('input[type=number]').val();
+      let prodID = $(this).attr("value");
+
+      fetch(`/product/${prodID}/`).then(response => response.json())
+        .then(data => {
+          // data is the product json
+          let li = createDiv('li', {innerText:``, className:'list-group-item d-flex justify-content-between lh-condensed'});
+          let div = createDiv('div', {innerText:``, className:'my-0'});
+          let h6 = createDiv('h6', {innerText:`${data.name} - $ ${data.price} X ${qty}`, className:'my-0'});
+          //let small = createDiv('small', {innerText:`$ ${data.price} X ${qty}`, className:'text-muted'});
+          let span = createDiv('span', {innerText:`$ ${data.price * parseInt(qty) }`, className:'text-muted'});
+
+          div.appendChild(h6);
+          //div.appendChild(small);
+          li.appendChild(div);
+          li.appendChild(span);
+          document.getElementById('cartList').appendChild(li);
+          let total = document.getElementById('total');
+          let new_cost = data.price * parseInt(qty);
+          let newTotal = parseFloat(total.getAttribute('value')) + new_cost;
+          total.setAttribute('value',newTotal) ;
+          total.innerText = newTotal;
+
+          let cartBadge = document.getElementById('cartBadge');
+          let newcartBadge = parseFloat(cartBadge.getAttribute('value')) + parseInt(qty);
+          cartBadge.setAttribute('value',newcartBadge) ;
+          cartBadge.innerText = newcartBadge;
+
+        });
+      
+    });
+    
+    $( document ).ready(function() {
+      allProd();
     });
   </script>
