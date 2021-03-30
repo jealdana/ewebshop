@@ -41,10 +41,18 @@
                       <a class="nav-link" id="pills-cart-tab" data-toggle="pill" href="#pills-cart" role="tab" aria-controls="pills-cart" aria-selected="false">
                         cart
                         <i class="fa fa-shopping-cart"></i>
-                        USD $<span class="cart-total">0</span>
-                      </a>
-                      
+                        {# USD $<span class="cart-total">0</span> #}
+                      </a>                      
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/api-auth/logout">logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a  class="nav-link" href="/api-auth/login">login</a>
+                    </li>
+                    {% endif %}
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{% include "frontend/landingPage.html" %}</div>

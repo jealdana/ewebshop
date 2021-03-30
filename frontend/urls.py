@@ -20,6 +20,7 @@ from django.contrib.auth.models import User
 from frontend import urls
 from frontend.views import LandingPage,createProduct
 from backend.views import product_list, product_detail
+from django.contrib.auth import views
 
 app_name = 'frontend'
 
