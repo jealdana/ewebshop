@@ -25,7 +25,7 @@ SECRET_KEY = '!q!!@5$4md110i82b%h3t+^!$bx8owp$fx9i3_wdv%zh$2ppw^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ewebshopprod.herokuapp.com']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
