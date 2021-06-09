@@ -5,6 +5,7 @@
 [![Generic badge](https://img.shields.io/badge/BOOTSTRAP-5.0-purple.svg)](/)
 [![Generic badge](https://img.shields.io/badge/MYSQL-blue.svg)](/)
 [![Generic badge](https://img.shields.io/badge/HEROKU-purple.svg)](/)
+[![Generic badge](https://img.shields.io/badge/Python-3.X-yellow.svg)](/)
 
 ## Overview
 
