@@ -47,22 +47,12 @@
           
               <div id="collapse-{{ product.id }}" class="collapse" aria-labelledby="heading-{{ product.id }}" data-parent="#accordionExample">
                 <div class="card-body p-3">                                    
-                  <form id="prodCreate">{% csrf_token %}
-                    <label for="photo_url">photo_url</label>
-                    <input type="url" name="photo_url" id="photo_url"><br>
-
-                    <label for="name">name</label>
-                    <input type="text" name="name" id="name"><br>
-
-                    <label for="code">code</label>
-                    <input type="text" name="code" id="code"><br>
-
-                    <label for="price">price</label>
-                    <input type="number" name="price" id="price"><br>
-
-                    <label for="description">description</label> <br>                                        
-                    <textarea id="description" name="description" rows="3" cols="20"></textarea><br>
+                  <form action="product/create/"id="prodCreate" method="POST">{% csrf_token %}                    
+                    <table>
+                      {{ productForm.as_table }}
+                    </table>
                     <input type="submit" value="Submit">
+                    <input type="text" name="test" id="testi">
                   </form>
                   <br></br>
                     
@@ -243,25 +233,31 @@
 
     }
 
-    $(document).on('submit','#prodCreate', function(e){
-      e.preventDefault();
-      $.ajax({
-        type:'POST',
-        url:'/product/create/',
-        data: {
-          photo_url:$('#photo_url').val(),
-          name:$('#name').val(),
-          code:$('#code').val(),
-          price:$('#price').val(),
-          description:$('#description').val(),
-          csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-        },
-        success:function(){
-            alert('New product created');
-        }
+    $(document).ready(function() {
+      $("#prodCreate").submit(function(event) {
+        event.preventDefault();
+        $.ajax({ data: $(this).serialize(), 
+                type: $(this).attr('method'), 
+                url: $(this).attr('action'), 
+                success: function(response) {
+                     console.log(response);
+                     if(response['success']) {
+                        alert();
+                        allProd();
+                     } 
+                     if(response['error']) {
+                         $("#feedbackmessage").html("<div class='alert alert-danger'>" +
+			                   response['error']['comment'] +"</div>");
+                     } 
+                },
+                error: function (request, status, error) {
+                     console.log(request.responseText);
+                }
+       });
       });
+      
     });
-
+    
     $(document).on('submit','#addCart', function(e){
       e.preventDefault();
 
@@ -270,15 +266,12 @@
 
       fetch(`/product/${prodID}/`).then(response => response.json())
         .then(data => {
-          // data is the product json
           let li = createDiv('li', {innerText:``, className:'list-group-item d-flex justify-content-between lh-condensed'});
           let div = createDiv('div', {innerText:``, className:'my-0'});
           let h6 = createDiv('h6', {innerText:`${data.name} - $ ${data.price} X ${qty}`, className:'my-0'});
-          //let small = createDiv('small', {innerText:`$ ${data.price} X ${qty}`, className:'text-muted'});
           let span = createDiv('span', {innerText:`$ ${data.price * parseInt(qty) }`, className:'text-muted'});
 
           div.appendChild(h6);
-          //div.appendChild(small);
           li.appendChild(div);
           li.appendChild(span);
           document.getElementById('cartList').appendChild(li);

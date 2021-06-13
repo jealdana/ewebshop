@@ -26,6 +26,8 @@ This is a demo online webshop with users and managers features.
     - [Stack specifications](#stack-specifications)
     - [Configurations](#configurations)
   - [To-do's](#to-dos)
+    - [UI](#ui)
+    - [Developers](#developers)
 
 
 ## Features
@@ -88,3 +90,11 @@ Development operations (DEVOPS)
 
 ### Developers
 1. Django tests
+2. Authentication views
+   1. Customized login/out view
+   2. Include the logo in the title and change background
+3. Creation of product
+   1. Auto refresh of the products view
+   2. Improvement of the form to create products
+   3. 1-clicker to create test products
+4. Consolidation of css into files
