@@ -34,6 +34,8 @@ This is a demo online webshop with users and managers features.
 
 ### Frontend
 - Creation/editing of products
+- Filtering by name or code
+- Sort by name or price
 
 ### Backend
 - REST API's
@@ -61,7 +63,8 @@ This application is was originally created as a stand-alone application, yet the
 
 2. Authentication:  
 As a common feature in moderm applications, the authentication process is a natural feature when configuring and creating and manipulate data or other users' access.
-3. 
+3. Filtering of product
+At this point, the filtering is done by js, although it could also be accomplished by filtering using extension of API and partially update the page (This will be included in future releases).
 
 ### Stack specifications
 
