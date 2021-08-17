@@ -1,23 +1,32 @@
-<div class="accordion" id="accordionExample">
-    <div class="card">
-      <div class="card-header" id="heading-{{ product.id }}">
-        <h2 class="mb-0 text-center">
-          <button class="btn btn-link btn-block" type="button" data-toggle="collapse" data-target="#collapse-{{ product.id }}" aria-expanded="true" aria-controls="collapse-{{ product.id }}">
-            Add product
-          </button>
-        </h2>
-      </div>
-  
-      <div id="collapse-{{ product.id }}" class="collapse" aria-labelledby="heading-{{ product.id }}" data-parent="#accordionExample">
-        <div class="card-body p-3">                                    
-          <form action="product/create/"id="prodCreate" method="POST">{% csrf_token %}                    
-            <table>
-              {{ productForm.as_table }}
-            </table>
-            <input type="submit" value="Submit">
-          </form>
-          <br></br>
-        </div>
-      </div>
+<div id="overlay">
+  <div id="text">
+    <h4>Adding product</h4>
+    <hr>
+    <div>
+      <h5>Adding multiple products</h5>
+      <p>Click on the "Choose File" button to upload a file:</p>
+
+      <form action="/#">
+        <input type="file" id="myFile" name="filename">
+        <input type="submit">
+      </form>
+    </div>
+    <br>
+    <div class="textOverLine">
+      <span> Or </span> 
+    </div>
+    <div>
+      <h5>Adding just one</h5>
+      <form action="product/create/"id="prodCreate" method="POST">{% csrf_token %}                    
+        <table>
+          {{ productForm.as_table }}
+        </table>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <br>
+    <div class="row">
+      <button onclick="off()" style="background-color: red;"> Cancel </button>
     </div>
   </div>
+</div>

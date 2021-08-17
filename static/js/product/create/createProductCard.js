@@ -25,6 +25,14 @@ $(document).ready(function() {
   
 });
 
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
 let createProductCard = (product) => {
 
     let card = createDiv('div',{className:'card',innerText:'',innerHTML:''});
