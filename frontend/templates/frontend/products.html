@@ -1,4 +1,11 @@
 {% load static %}
+<script src="{% static 'js/createDiv.js' %}"></script>
+<script src="{% static 'js/product/create/createProductCard.js' %}"></script>
+<script src="{% static 'js/product/create/createProductDescriptionCard.js' %}"></script>
+<script src="{% static 'js/product/filter/filterProducts.js' %}"></script>
+<script src="{% static 'js/product/filter/filterProductsOnChange.js' %}"></script>
+<script src="{% static 'js/cart/add/addToCart.js' %}"></script>
+
 <div class="container-fluid">
     <div class="row">
     {% if user.is_authenticated %}
@@ -27,12 +34,7 @@
     </div>
   </div>
 
-  <script src="{% static 'js/createDiv.js' %}"></script>
-  <script src="{% static 'js/product/create/createProductCard.js' %}"></script>
-  <script src="{% static 'js/product/create/createProductDescriptionCard.js' %}"></script>
-  <script src="{% static 'js/product/filter/filterProducts.js' %}"></script>
-  <script src="{% static 'js/product/filter/filterProductsOnChange.js' %}"></script>
-  <script src="{% static 'js/cart/add/addToCart.js' %}"></script>
+
   <script>
     
     $( document ).ready(function() {
