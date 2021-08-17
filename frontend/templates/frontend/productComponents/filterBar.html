@@ -1,0 +1,20 @@
+<div class="btn-toolbar mb-2 mb-md-0">
+    <div class="input-group w-100">
+        <select id="productSearchFilter" value='name' class="custom-select">
+            <option selected value="name" >Name</option>
+            <option value="code" >Code</option>
+          </select>
+        <input id="productSearchInput" type="text" class="form-control" aria-label="Text input with dropdown button">
+        <div class="input-group-append">
+            <button onclick="filterProd()" class="btn btn-outline-secondary" type="button">Search</button>
+            <button onclick="allProd()" class="btn btn-outline-secondary" type="button">All</button>
+            <form class="float-end" action="/" id="sortForm">
+                <label for="sortItems">Sort by: </label>
+                <select id="sortItems" class="custom-select btn " value='name' name="sortlist" form="sortForm">
+                  <option class="text-secondary" value="name">Name</option>
+                  <option class="text-secondary" value="price">Price</option>
+                </select>
+              </form>
+        </div>
+    </div>
+</div>   
