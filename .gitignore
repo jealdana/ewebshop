@@ -2,6 +2,10 @@
 
 .idea/
 staticfiles/
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
+*.pyc
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
